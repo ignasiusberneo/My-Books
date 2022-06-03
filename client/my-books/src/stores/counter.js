@@ -11,13 +11,15 @@ export const useCounterStore = defineStore({
   },
   actions: {
     axiosGetBooks(keyword) {
-      return axios.get(`http://localhost:4001/books?keyword=${keyword}`);
+      return axios.get(
+        `https://neo-my-books.herokuapp.com/books?keyword=${keyword}`
+      );
     },
     axiosAddWishlist(data) {
-      return axios.post(`http://localhost:4001/wishlist`, data);
+      return axios.post(`https://neo-my-books.herokuapp.com/wishlist`, data);
     },
     axiosGetWishlist() {
-      return axios.get(`http://localhost:4001/wishlist`);
+      return axios.get(`https://neo-my-books.herokuapp.com/wishlist`);
     },
   },
 });

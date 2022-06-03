@@ -19,6 +19,22 @@ class Book {
     }
   }
 
+  static async findBook(title) {
+    try {
+      const response = await this.books()
+        .find()
+        .toArray({
+          volumeInfo: {
+            title: title,
+          },
+        });
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async getWishlist() {
     try {
       const response = await this.books().find().toArray();

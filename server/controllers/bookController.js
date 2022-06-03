@@ -35,21 +35,26 @@ class BookController {
 
   static async addWishlist(req, res) {
     try {
-      const { title, thumbnail, author, rating } = req.body;
-      const data = {
-        title,
-        thumbnail,
-        author,
-        rating,
-      };
+      const data = req.body;
+      // console.log(data.volumeInfo.title);
+      // const response = await Book.findBook(data.volumeInfo.title);
+      // if (response.length !== 0) {
+      //   throw new Error("Forbidden");
+      // }
       await Book.addWishlist(data);
       res.status(201).json({
         message: "Add to wishlist success",
       });
     } catch (error) {
-      res.status(500).json({
-        message: "Internal Server Error",
-      });
+      if (error.message === "Forbidden") {
+        res.status(403).json({
+          message: "You already add this book to wishlist",
+        });
+      } else {
+        res.status(500).json({
+          message: "Internal Server Error",
+        });
+      }
     }
   }
 }
